@@ -1,1 +1,2 @@
-Repository for storing completed python hackerrank solutions written in python.
+Repository for storing completed python hackerrank and crytopals solutions written in python.
+
