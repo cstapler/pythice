@@ -46,20 +46,17 @@ class CryptoKit(object):
             full_key.append(key_bytes[i % key_length])
         return self.hex_xor(byte_array, full_key)
 
-    def break_xor_cipher(self, ciphertext):
+    def break_xor_cipher(self, cipher_bytes):
         score_arr = []
-        cipher_bytes = bytes.fromhex(ciphertext)
         for c in range(256):
             result = self.hex_xor_single_key(cipher_bytes, c)
             i_score = self.score_decoded(result)
-            score_arr.append([i_score, result])
+            score_arr.append([i_score, result, c])
         score_arr.sort(key=lambda x: x[0], reverse=True)
         return score_arr[0]
 
     def encrypt_rep_xor(self, plaintext, key):
-        key_bytes = bytes(key, 'utf-8')
-        input_bytes = bytes(plaintext, 'utf-8')
-        result = self.hex_xor_repeat_key(input_bytes, key_bytes)
+        result = self.hex_xor_repeat_key(plaintext, key)
         return result
 
     def hamming_distance(self, text_1, text_2):
